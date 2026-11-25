@@ -1,6 +1,8 @@
 import os
 
 OUTPUT_DIR = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
+OUTPUT_FILE = "entry.txt"
+MAX_LINE_LENGTH = 160
 
 # One-line out-of-office reply for make.fun's "Funniest One-Line
 # Out-of-Office Reply" bounty. The gate: UTF-8 text of 1-160 characters.
@@ -12,9 +14,9 @@ OUTPUT_DIR = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
 # Written for the sponsor to switch on as their own away message.
 LINE = "I'm out until Monday. If it's urgent, please tell my boss; she'll schedule a meeting about it, and I'll miss that too."
 
-if not 1 <= len(LINE) <= 160 or not LINE.strip():
+if not 1 <= len(LINE) <= MAX_LINE_LENGTH or not LINE.strip():
     raise ValueError("entry line must be 1-160 characters")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
-with open(os.path.join(OUTPUT_DIR, "entry.txt"), "w", encoding="utf-8") as f:
+with open(os.path.join(OUTPUT_DIR, OUTPUT_FILE), "w", encoding="utf-8") as f:
     f.write(LINE)
